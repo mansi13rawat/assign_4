@@ -117,30 +117,78 @@ int* clone(int a[],int n,int b[])
     return(b);
 }
 
-void rotanticlock(int a[],int n, int r)
+void rotclock(int a[],int n, int r)
 {
-    int b[r];
-
-    for(int i=0;i<n;i++)
+    r=r%4;
+    if(r==0)
     {
-        if(i<r)
+        for(int i=0;i<n;i++)
         {
-            b[i]=a[i];
+            printf("%d ",a[i]);
         }
-        else
+    }
+    else if(r==1)
+    {
+        for(int i=0;i<n;i++)
         {
-            a[i-r]=a[i];
+            printf("%d\n",a[i]);
+        }
+    }
+    else if(r==2)
+    {
+        for(int i=n-1;i>=0;i--)
+        {
+            printf("%d ",a[i]);
+        }
+    }
+    else
+    {
+        for(int i=n-1;i>=0;i--)
+        {
+            printf("%d\n",a[i]);
         }
     }
 
-    for(int i=n-r;i<n;i++)
-    {
-        a[i]=b[(i-(n-r))];
-    }
-
+    printf("\n");
 }
 
-void rotclock(int a[],int n, int r)
+void rotanticlock(int a[],int n, int r)
+{
+    r=r%4;
+
+    if(r==0)
+    {
+        for(int i=0;i<n;i++)
+        {
+            printf("%d ",a[i]);
+        }
+    }
+    else if(r==1)
+    {
+        for(int i=n-1;i>=0;i--)
+        {
+            printf("%d\n",a[i]);
+        }
+    }
+    else if(r==2)
+    {
+        for(int i=n-1;i>=0;i--)
+        {
+            printf("%d ",a[i]);
+        }
+    }
+    else
+    {
+        for(int i=0;i<n;i++)
+        {
+            printf("%d\n",a[i]);
+        }
+    }
+
+    printf("\n");
+}
+
+void shiftright(int a[],int n, int r)
 {
     int b[r];
 
@@ -159,39 +207,27 @@ void rotclock(int a[],int n, int r)
         a[(i+r)]=b[i];
     }
 }
-
-void shiftright(int a[],int n)
-{
-    int b=a[n-1];
-
-    for(int i=n-1;i>=0;i--)
-    {
-        if(i>0)
-        {
-            a[i]=a[i-1];
-        }
-        else
-        {
-            a[i]=b;
-        }
-    }
-}
 // 0 1 2 3 4 
 // 4 0 1 2 3
-void shiftleft(int a[], int n)
+void shiftleft(int a[], int n, int r)
 {
-    int b=a[0];
-    
+    int b[r];
+
     for(int i=0;i<n;i++)
     {
-        if(i!=n-1)
+        if(i<r)
         {
-            a[i]=a[i+1];
+            b[i]=a[i];
         }
         else
         {
-            a[i]=b;
+            a[i-r]=a[i];
         }
+    }
+
+    for(int i=n-r;i<n;i++)
+    {
+        a[i]=b[(i-(n-r))];
     }
 }
 
